@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time balance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%237d92ab' d='M20 20 L80 20 L70 40 L50 50 L30 40 L20 20' /%3E%3Cpath fill='%237d92ab' d='M20 80 L80 80 L70 60 L50 50 L30 60 L20 80' /%3E%3C/svg%3E"></head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-hourglass-half"></i> Time balance</h1>
+
+        <form id="life-form">
+            <!-- Ряд из двух полей -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthdate"><i class="fas fa-birthday-cake"></i> Date of birth</label>
+                    <input type="date" id="birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="life-expectancy"><i class="fas fa-heartbeat"></i> Expected lifespan (years)</label>
+                    <input type="number" id="life-expectancy" min="1" step="1" value="100" required>
+                </div>
+            </div>
+        </form>
+
+        <div class="progress-section">
+            <div class="progress-label">
+                <span><i class="fas fa-chart-line"></i> Lived</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-filled" id="progress-filled" style="width: 0%;">
+                    <span class="percent-text" id="percent-text">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="results">
+            <h2><i class="fas fa-table"></i> Detailed calculation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Lived</th>
+                        <th>Left</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <tr><td><i class="fas fa-calendar-alt"></i> Years</td><td id="years-lived">0</td><td id="years-left">0</td></tr>
+                    <tr><td><i class="fas fa-calendar-alt"></i> Months</td><td id="months-lived">0</td><td id="months-left">0</td></tr>
+                    <tr><td><i class="fas fa-calendar-week"></i> Weeks</td><td id="weeks-lived">0</td><td id="weeks-left">0</td></tr>
+                    <tr><td><i class="fas fa-sun"></i> Days</td><td id="days-lived">0</td><td id="days-left">0</td></tr>
+                    <tr><td><i class="fas fa-clock"></i> Hours</td><td id="hours-lived">0</td><td id="hours-left">0</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

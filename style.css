@@ -1,0 +1,298 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #e3e7ed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    color: #2c3a4b;
+}
+
+.container {
+    max-width: 740px;
+    width: 100%;
+    background: #f4f7fc;
+    border-radius: 36px;
+    padding: 38px 32px;
+    box-shadow: 0 15px 30px -10px rgba(0, 20, 30, 0.15);
+    border: 1px solid #d9e0eb;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -0.3px;
+    margin: 0 0 28px 0;
+    color: #2a3b4c;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #cad2df;
+    padding-bottom: 22px;
+}
+
+h1 i {
+    color: #6b7e94;
+    font-size: 1.8rem;
+    opacity: 0.7;
+}
+
+/* Ряд для двух полей */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1; /* оба поля равной ширины */
+    margin-bottom: 0; /* убираем нижний отступ, он теперь на ряде */
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #5f7287;
+    margin-bottom: 8px;
+}
+
+label i {
+    color: #6f859c;
+    width: 18px;
+    font-size: 1rem;
+}
+
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #cbd3df;
+    border-radius: 50px;
+    font-size: 1rem;
+    color: #1e2e3f;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #7d92ab;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(109, 130, 150, 0.1);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+/* Прогресс-бар */
+.progress-section {
+    margin: 30px 0 25px;
+}
+
+.progress-label {
+    font-size: 1rem;
+    font-weight: 350;
+    color: #3b4d61;
+    margin-bottom: 14px;
+}
+
+.progress-label i {
+    margin-right: 10px;
+    color: #6d7f96;
+}
+
+.progress-bar-container {
+    height: 44px;
+    background: #d2dae6;               /* фон пустой части */
+    border-radius: 44px;                /* полное скругление */
+    padding: 4px;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;                   /* скрывает выступы дочерних элементов */
+}
+
+.progress-filled {
+    height: 100%;
+    width: 0%;                          /* меняется скриптом */
+    background: #7d92ab;
+    border-radius: 44px;       /* скруглён только слева */
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;                   /* анимация не выходит за границы */
+    box-shadow: 0 0 6px #7d92ab;
+    animation: glow 2.5s ease-in-out infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+}
+
+.progress-filled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+    border-radius: inherit;              /* скругление как у родителя (слева) */
+}
+
+.percent-text {
+    position: relative;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
+    white-space: nowrap;
+    z-index: 2;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #7d92ab, 0 0 8px #7d92ab80;
+    }
+    to {
+        box-shadow: 0 0 12px #7d92ab, 0 0 18px #7d92ab99;
+    }
+}
+
+.results {
+    margin-top: 42px;
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 28px 24px;
+    border: 1px solid #dce3ed;
+}
+
+.results h2 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #2d4053;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.results h2 i {
+    color: #7d92ab;
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: center;
+    padding: 14px 8px 10px 8px;
+    font-weight: 400;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6c7f96;
+    border-bottom: 1px solid #d1dae7;
+}
+
+td {
+    padding: 15px 8px;
+    border-bottom: 1px solid #e3eaf3;
+    color: #2a3c4e;
+    font-size: 1rem;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:first-child {
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #3b5066;
+}
+
+td:first-child i {
+    width: 22px;
+    color: #7d92ab;
+    font-size: 1.1rem;
+}
+
+td:not(:first-child) {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-weight: 350;
+    color: #1f3142;
+    text-align: right;
+    padding: 12px 20px;
+    background: #eef3fa;
+    border-radius: 0;
+}
+
+/* Вертикальный разделитель */
+td:nth-child(2) {
+    border-right: 1px solid #e3eaf3;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .container {
+        padding: 28px 20px;
+    }
+    h1 {
+        font-size: 1.7rem;
+    }
+    .form-row {
+        flex-direction: column; /* на мобильных поля снова в столбик */
+        gap: 16px;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+    .progress-bar-container {
+        height: 40px;
+    }
+    .percent-text {
+        font-size: 0.75rem;
+        padding: 1px 5px;
+    }
+    td:first-child {
+        font-size: 0.9rem;
+    }
+    td:not(:first-child) {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+    }
+}
