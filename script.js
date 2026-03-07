@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const now = new Date();
 
         if (birthdate > now) {
-            alert('Дата рождения не может быть в будущем!');
+            alert('This is future date!');
             return;
         }
 

@@ -296,3 +296,44 @@ td:nth-child(2) {
         padding: 10px 16px;
     }
 }
+
+/* Контейнер для адаптивной таблицы */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: inherit; /* чтобы скругление углов сохранилось */
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px; /* тонкий скроллбар для красоты */
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #e0e6f0;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #7d92ab;
+    border-radius: 10px;
+}
+
+/* Адаптивность для самых маленьких экранов */
+@media (max-width: 480px) {
+    td:first-child {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+    td:first-child i {
+        width: 18px;
+        font-size: 0.9rem;
+    }
+    td:not(:first-child) {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+    th {
+        font-size: 0.65rem;
+        padding: 10px 4px;
+    }
+}
