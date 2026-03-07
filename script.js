@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const STORAGE_BIRTHDATE = 'lifeCounter.birthdate';
     const STORAGE_LIFE_EXP = 'lifeCounter.lifeExpectancy';
 
-    // Элементы прогресс-бара
     const progressFilled = document.getElementById('progress-filled');
     const percentText = document.getElementById('percent-text');
 
@@ -36,6 +35,36 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem(STORAGE_LIFE_EXP, lifeExpectancyInput.value);
     }
 
+    function getAge(birthdate) {
+        const today = new Date();
+        let age = today.getFullYear() - birthdate.getFullYear();
+        const m = today.getMonth() - birthdate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    function getPeriodName(age) {
+        if (age < 3) return 'Infancy';
+        if (age < 12) return 'Childhood';
+        if (age < 18) return 'Adolescence';
+        if (age < 35) return 'Youth';
+        if (age < 60) return 'Maturity';
+        return 'Elderly';
+    }
+
+    function getYearsWord_ru(years) {
+        if (years % 10 === 1 && years % 100 !== 11) return 'год';
+        if ([2,3,4].includes(years % 10) && ![12,13,14].includes(years % 100)) return 'года';
+        return 'лет';
+    }
+
+    function getYearsWord(years) {
+        if (years <= 1) return 'year';
+        return 'years';
+    }
+
     function updateResults() {
         const birthdateStr = birthdateInput.value;
         const lifeExpectancy = parseFloat(lifeExpectancyInput.value);
@@ -48,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const now = new Date();
 
         if (birthdate > now) {
-            alert('This is future date!');
+            alert('This is a future date!');
             return;
         }
 
@@ -81,9 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (progressPercent > 100) progressPercent = 100;
         if (progressPercent < 0) progressPercent = 0;
 
-        // Обновляем ширину заполненной части и текст с процентами
         progressFilled.style.width = progressPercent + '%';
         percentText.textContent = progressPercent.toFixed(2) + '%';
+
+        // Обновление возраста и периода
+        const ageInYears = getAge(birthdate);
+        document.getElementById('current-age').textContent = ageInYears + ' ' + getYearsWord(ageInYears);
+        document.getElementById('current-period-name').textContent = getPeriodName(ageInYears);
 
         saveToCache();
     }
