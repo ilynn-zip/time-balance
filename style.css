@@ -52,8 +52,8 @@ h1 i {
 }
 
 .form-group {
-    flex: 1; /* оба поля равной ширины */
-    margin-bottom: 0; /* убираем нижний отступ, он теперь на ряде */
+    flex: 1;
+    margin-bottom: 0;
 }
 
 label {
@@ -103,6 +103,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Прогресс-бар */
 .progress-section {
     margin: 30px 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .progress-label {
@@ -110,6 +113,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 350;
     color: #3b4d61;
     margin-bottom: 14px;
+    align-self: flex-start;
 }
 
 .progress-label i {
@@ -119,42 +123,97 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .progress-bar-container {
     height: 44px;
-    background: #d2dae6;               /* фон пустой части */
-    border-radius: 44px;                /* полное скругление */
+    width: 100%;
+    background: #d2dae6;
+    border-radius: 44px;
     padding: 4px;
     box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.05);
     position: relative;
-    overflow: hidden;                   /* скрывает выступы дочерних элементов */
+    overflow: hidden;
 }
 
 .progress-filled {
     height: 100%;
-    width: 0%;                          /* меняется скриптом */
-    background: #7d92ab;
-    border-radius: 44px;       /* скруглён только слева */
+    width: 0%;
+    background: rgba(125, 146, 171, 0.0);
+    border-radius: 44px;
     transition: width 0.5s ease;
     position: relative;
-    overflow: hidden;                   /* анимация не выходит за границы */
-    box-shadow: 0 0 6px #7d92ab;
-    animation: glow 2.5s ease-in-out infinite alternate;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 12px;
+    box-shadow: 0 0 8px rgba(125, 146, 171, 0.0);
 }
 
-.progress-filled::after {
-    content: '';
+.waves-inner {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transform: translateX(-100%);
-    animation: shimmer 3s infinite;
     pointer-events: none;
-    border-radius: inherit;              /* скругление как у родителя (слева) */
+    z-index: 1;
+}
+
+.wave-parallax>use {
+    animation: moveForever 20s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.wave-parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.wave-parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.wave-parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.wave-parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 18s;
+}
+
+.wave-parallax>use:nth-child(5) {
+    animation-delay: -6s;
+    animation-duration: 25s;
+}
+
+.wave-layer-1 {
+    fill: rgba(125, 146, 171, 0.7);
+}
+
+.wave-layer-2 {
+    fill: rgba(125, 146, 171, 0.5);
+}
+
+.wave-layer-3 {
+    fill: rgba(125, 146, 171, 0.3);
+}
+
+.wave-layer-4 {
+    fill: rgba(125, 146, 171, 0.2);
+}
+
+.wave-layer-5 {
+    fill: rgba(125, 146, 171, 0.1);
+}
+
+@keyframes moveForever {
+    0% {
+        transform: translateX(-90px);
+    }
+
+    100% {
+        transform: translateX(85px);
+    }
 }
 
 .percent-text {
@@ -162,30 +221,59 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #ffffff;
     font-size: 0.9rem;
     font-weight: 500;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     background: rgba(0, 0, 0, 0.3);
     padding: 2px 8px;
     border-radius: 20px;
     backdrop-filter: blur(2px);
     white-space: nowrap;
-    z-index: 2;
+    z-index: 3;
 }
 
-@keyframes shimmer {
-    100% {
-        transform: translateX(100%);
-    }
+/* Блок текущего возраста и периода */
+.current-period {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 1rem;
+    color: #3b4d61;
+    background: #f0f4fa;
+    padding: 10px 18px;
+    border-radius: 40px;
+    width: fit-content;
+    border: 1px solid #dce3ed;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-@keyframes glow {
-    from {
-        box-shadow: 0 0 5px #7d92ab, 0 0 8px #7d92ab80;
-    }
-    to {
-        box-shadow: 0 0 12px #7d92ab, 0 0 18px #7d92ab99;
-    }
+.current-period .separator {
+    color: #7d92ab;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
+.period-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: #7d92ab;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 5px #7d92ab;
+}
+
+#current-period-name {
+    font-weight: 500;
+    color: #2a3c4e;
+}
+
+/* Таблица результатов */
 .results {
     margin-top: 42px;
     background: #ffffff;
@@ -210,13 +298,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0.7;
 }
 
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: inherit;
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #e0e6f0;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #7d92ab;
+    border-radius: 10px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
 th {
-    text-align: center;
+    text-align: left;
     padding: 14px 8px 10px 8px;
     font-weight: 400;
     font-size: 0.7rem;
@@ -261,130 +369,73 @@ td:not(:first-child) {
     border-radius: 0;
 }
 
-/* Вертикальный разделитель */
+/* Вертикальный разделитель между прожитым и оставшимся */
 td:nth-child(2) {
-    border-right: 1px solid #e3eaf3;
+    border-right: 1px solid #d8e0ec;
 }
 
-/* Блок текущего возраста и периода */
-.current-period {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
-    margin: 16px auto 0;
-    font-size: 1rem;
-    color: #3b4d61;
-    background: #f0f4fa;
-    padding: 10px 18px;
-    border-radius: 40px;
-    width: fit-content;
-    border: 1px solid #dce3ed;
-}
-
-.current-period .separator {
-    color: #7d92ab;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.period-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    background: #7d92ab;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 5px #7d92ab;
-}
-
-#current-period-name {
-    font-weight: 500;
-    color: #2a3c4e;
-}
-
-
-/* Адаптивность */
+/* Адаптивность для мобильных */
 @media (max-width: 600px) {
     .container {
         padding: 28px 20px;
     }
+
     h1 {
         font-size: 1.7rem;
     }
+
     .form-row {
-        flex-direction: column; /* на мобильных поля снова в столбик */
+        flex-direction: column;
         gap: 16px;
     }
-    .form-group {
-        margin-bottom: 0;
-    }
+
     .progress-bar-container {
         height: 40px;
     }
+
     .percent-text {
         font-size: 0.75rem;
         padding: 1px 5px;
     }
+
     .current-period {
         font-size: 0.9rem;
         padding: 8px 14px;
     }
+
     .dot {
         width: 10px;
         height: 10px;
     }
+
     td:first-child {
         font-size: 0.9rem;
     }
+
     td:not(:first-child) {
         font-size: 0.9rem;
         padding: 10px 16px;
     }
+
+    th {
+        font-size: 0.65rem;
+        padding: 10px 4px;
+    }
 }
 
-/* Контейнер для адаптивной таблицы */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    border-radius: inherit; /* чтобы скругление углов сохранилось */
-}
-
-.table-responsive::-webkit-scrollbar {
-    height: 6px; /* тонкий скроллбар для красоты */
-}
-
-.table-responsive::-webkit-scrollbar-track {
-    background: #e0e6f0;
-    border-radius: 10px;
-}
-
-.table-responsive::-webkit-scrollbar-thumb {
-    background: #7d92ab;
-    border-radius: 10px;
-}
-
-/* Адаптивность для самых маленьких экранов */
 @media (max-width: 480px) {
     td:first-child {
         font-size: 0.8rem;
         gap: 6px;
     }
+
     td:first-child i {
         width: 18px;
         font-size: 0.9rem;
     }
+
     td:not(:first-child) {
         font-size: 0.8rem;
-        padding: 8px 10px;
-    }
-    th {
-        font-size: 0.65rem;
-        padding: 10px 4px;
+        padding: 8px 12px;
     }
 }

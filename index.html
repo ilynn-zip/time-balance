@@ -35,6 +35,23 @@
             </div>
             <div class="progress-bar-container">
                 <div class="progress-filled" id="progress-filled" style="width: 0%;">
+
+                    <svg class="waves-inner" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 40" preserveAspectRatio="none"
+                        shape-rendering="auto">
+                        <defs>
+                            <path id="wave-path"
+                                d="M-200 20c30 0 58-9 88-9s58 9 88 9 58-9 88-9 58 9 88 9 58-9 88-9 58 9 88 9 v40h-528z" />
+                        </defs>
+                        <g class="wave-parallax">
+                            <use xlink:href="#wave-path" x="48" y="0" class="wave-layer-1" />
+                            <use xlink:href="#wave-path" x="48" y="2" class="wave-layer-2" />
+                            <use xlink:href="#wave-path" x="48" y="4" class="wave-layer-3" />
+                            <use xlink:href="#wave-path" x="48" y="6" class="wave-layer-4" />
+                            <use xlink:href="#wave-path" x="48" y="8" class="wave-layer-5" />
+                        </g>
+                    </svg>
+
                     <span class="percent-text" id="percent-text">0%</span>
                 </div>
             </div>
