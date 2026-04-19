@@ -128,4 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     lifeExpectancyInput.addEventListener('input', updateResults);
 
     updateResults();
+
+    setInterval(updateResults, 3600000);
+
 });
